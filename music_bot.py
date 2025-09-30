@@ -36,8 +36,13 @@ def login_to_dab():
         # Disabilita i warning per i certificati SSL non verificati, come nello script originale
         requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
         
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'Referer': 'https://dab.yeet.su/' # Aggiungi l'header Referer
+        }
         response = AUTH_SESSION.post(
             LOGIN_ENDPOINT, 
+            headers=headers,
             json={'email': DAB_EMAIL, 'password': DAB_PASSWORD},
             verify=False, # Come da script originale
             timeout=10
